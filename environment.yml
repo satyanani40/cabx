@@ -1,0 +1,45 @@
+name: feqor_api_env
+channels:
+  - defaults
+dependencies:
+  - ca-certificates=2018.03.07=0
+  - certifi=2018.4.16=py36_0
+  - libedit=3.1.20170329=h6b74fdf_2
+  - libffi=3.2.1=hd88cf55_4
+  - libgcc-ng=7.2.0=hdf63c60_3
+  - libstdcxx-ng=7.2.0=hdf63c60_3
+  - ncurses=6.1=hf484d3e_0
+  - openssl=1.0.2o=h20670df_0
+  - pip=10.0.1=py36_0
+  - python=3.6.6=hc3d631a_0
+  - readline=7.0=ha6073c6_4
+  - setuptools=39.2.0=py36_0
+  - sqlite=3.24.0=h84994c4_0
+  - tk=8.6.7=hc745277_3
+  - wheel=0.31.1=py36_0
+  - xz=5.2.4=h14c3975_4
+  - zlib=1.2.11=ha838bed_2
+  - pip:
+    - aniso8601==3.0.2
+    - chardet==3.0.4
+    - click==6.7
+    - colorama==0.3.9
+    - flask==1.0.2
+    - flask-cors==3.0.6
+    - flask-pymongo==2.0.1
+    - flask-restplus==0.11.0
+    - idna==2.7
+    - itsdangerous==0.24
+    - jinja2==2.10
+    - jsonschema==2.6.0
+    - markupsafe==1.0
+    - pymongo==3.7.1
+    - python-json-logger==0.1.9
+    - pytz==2018.5
+    - requests==2.19.1
+    - six==1.11.0
+    - structlog==18.1.0
+    - urllib3==1.23
+    - werkzeug==0.14.1
+
+
