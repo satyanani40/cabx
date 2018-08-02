@@ -3,8 +3,8 @@ from pymongo import ReturnDocument
 from bson.dbref import DBRef
 
 from datetime import datetime
-from feqor.utils import constants
-from feqor.app import mongo
+from cabx.utils import constants
+from cabx.app import mongo
 
 
 class DB(object):
@@ -13,6 +13,28 @@ class DB(object):
     """
     def __init__(self, logger):
         self.logger = logger
+
+    def fetch_one(selfs, collection, query, **kwargs):
+        """
+        returns one item from given collection along with given projection fields
+        :param collection:
+        :param query:
+        :param kwargs:
+        :return:
+        """
+        if 'projection' in kwargs and kwargs['projection']:
+            projection = kwargs['projection']
+        else:
+            projection = None
+
+        db_ref_fields = []
+        if projection:
+            for key in list(projection):
+                if collection in constants.DB_REFS and key in constants.DB_REFS[collection]:
+                    db_ref_fields.append(key)
+        else:
+            db_ref_fields.extend(constants.DB_REFS.get(collection, []))
+        return mongo.db[collection].find_one(query, projection)
 
     def fetch(self, collection, query, **kwargs):
         sort_data = []
@@ -63,6 +85,25 @@ class DB(object):
             return list(cursor)
         else:
             return self.fetch_db_ref_fields_data(cursor, db_ref_fields)
+
+
+
+    def find_one_update_or_create(self, collection, query, payload, upsert=False, **kwargs):
+        """
+        creates or updates found document
+        :param collection:
+        :param query:
+        :param payload:
+        :param upsert:
+        :param kwargs:
+        :return: updated or created document
+        """
+        payload[constants.CREATED_DATE] = datetime.strftime(datetime.now(), constants.MONGO_DOC_CREATE_FORMAT)
+        return mongo.db[collection].find_one_and_update(
+            query,{"$set":payload},upsert=upsert,
+            return_document=ReturnDocument.AFTER
+        )
+
 
     def create(self, collection, payload, **kwargs):
         """

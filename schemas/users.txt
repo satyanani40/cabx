@@ -1,0 +1,23 @@
+1. db.createCollection("users", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "full_name", "mobile_number"],
+         properties: {
+            full_name: {
+               bsonType: "string",
+               description: "must be a string and is required"
+            },
+            mobile_number: {
+               bsonType: "string",
+               description: "must be a string and is not required"
+            }
+         }
+      }
+   }
+})
+
+it will through any error description but don't will failed.
+
+2.db.members.createIndex( { "user_id": 1 }, { unique: true } )
+the above statement will be used to create unique values.

@@ -4,7 +4,7 @@ from datetime import datetime
 from bson import ObjectId
 from structlog import get_logger
 
-from feqor.utils import constants
+from cabx.utils import constants
 
 logger = get_logger()
 ENVIRONMENT = os.getenv("ENVIRONMENT", constants.LOCAL)
@@ -54,5 +54,6 @@ RESTPLUS_JSON = {'separators': (', ', ': '),
 
 # to validate restplus model
 RESTPLUS_VALIDATE = True
+
 
 logger.info("configuration reading done.")

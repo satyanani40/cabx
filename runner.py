@@ -6,7 +6,7 @@ from cabx.utils import constants
 from cabx import app
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", constants.LOCAL)
-qvd_app = app.create_app("cabx", config_path="cabdx.utils.config", env=ENVIRONMENT)
+qvd_app = app.create_app("cabx", config_path="cabx.utils.config", env=ENVIRONMENT)
 
 if __name__ == '__main__':
     import argparse
