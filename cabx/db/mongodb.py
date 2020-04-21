@@ -1,6 +1,8 @@
 import pymongo
 from pymongo import ReturnDocument
+from bson import ObjectId
 from bson.dbref import DBRef
+
 
 from datetime import datetime
 from cabx.utils import constants
@@ -98,9 +100,11 @@ class DB(object):
         :param kwargs:
         :return: updated or created document
         """
-        payload[constants.CREATED_DATE] = datetime.strftime(datetime.now(), constants.MONGO_DOC_CREATE_FORMAT)
+        _id = str(ObjectId())
+        payload[constants.UPDATED_DATE] = datetime.strftime(datetime.now(), constants.MONGO_DOC_CREATE_FORMAT)
+        self.logger.info("updating document", collection=collection, query=query, payload=payload)
         return mongo.db[collection].find_one_and_update(
-            query,{"$set":payload},upsert=upsert,
+            query,{"$set":payload, "$setOnInsert": {"_id": _id}},upsert=upsert,
             return_document=ReturnDocument.AFTER
         )
 

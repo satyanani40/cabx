@@ -39,7 +39,7 @@ MONGO_DBNAME = data['mongo_dbname']
 logger.info("mongodb database found.", db_name=MONGO_DBNAME)
 
 # Custom Encoder
-class FeqorJSONEncoder(json.JSONEncoder):
+class JSONEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, ObjectId):
             return str(o)
@@ -50,10 +50,8 @@ class FeqorJSONEncoder(json.JSONEncoder):
 
 RESTPLUS_JSON = {'separators': (', ', ': '),
                 'indent': 2,
-                'cls': FeqorJSONEncoder}
+                'cls': JSONEncoder}
 
 # to validate restplus model
 RESTPLUS_VALIDATE = True
-
-
 logger.info("configuration reading done.")
