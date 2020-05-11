@@ -8,6 +8,9 @@ This a Flask application that handles the backend for FEQoR API.
     $ wget -O miniconda_install.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
     $ ./miniconda_install.sh
     ```
+    
+    
+    
 
  - Create Anaconda enviromment:
     ```sh
